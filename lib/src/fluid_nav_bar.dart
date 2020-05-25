@@ -167,6 +167,7 @@ class _FluidNavBarState extends State<FluidNavBar>
         .entries
         .map((entry) =>
         widget.itemBuilder(entry.value, FluidNavBarItem(
+          _currentIndex,
           entry.value.iconPath,
           _currentIndex == entry.key,
               () => _handleTap(entry.key),
@@ -252,8 +253,8 @@ class _BackgroundCurvePainter extends CustomPainter {
   static const _horizontalControlBottom = 0.5;
   static const _pointControlTop = 0.35;
   static const _pointControlBottom = 0.85;
-  static const _topY = -10.0;
-  static const _bottomY = 54.0;
+  static const _topY = -5.0;
+  static const _bottomY = 44.0;
   static const _topDistance = 0.0;
   static const _bottomDistance = 6.0;
 

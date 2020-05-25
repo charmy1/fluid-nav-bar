@@ -17,9 +17,17 @@ typedef void FluidNavBarButtonTappedCallback();
 ///
 ///  * [FluidNavBar]
 ///  * [FluidNavBarIcon]
-
+List<String> list = [
+  "Ana Sayfa",
+  "Soru Çöz",
+  "Analiz",
+  "Ödevler",
+  "Pomodoro"
+]; //todo as a parameter
 class FluidNavBarItem extends StatefulWidget {
   static const nominalExtent = const Size(64, 64);
+
+  final int currentIndex;
 
   /// The path of the SVG asset
   final String iconPath;
@@ -46,6 +54,7 @@ class FluidNavBarItem extends StatefulWidget {
   final double animationFactor;
 
   FluidNavBarItem(
+      this.currentIndex,
     this.iconPath,
     this.selected,
     this.onTap,
@@ -151,42 +160,60 @@ class _FluidNavBarItemState extends State<FluidNavBarItem>
     return GestureDetector(
       onTap: widget.onTap,
       behavior: HitTestBehavior.opaque,
-      child: Container(
-        constraints: BoxConstraints.tight(ne),
-        alignment: Alignment.center,
-        child: Container(
-          margin: EdgeInsets.all(ne.width / 2 - _iconSize),
-          constraints: BoxConstraints.tight(Size.square(_iconSize * 2)),
-          decoration: ShapeDecoration(
-            color: widget.backgroundColor,
-            shape: CircleBorder(),
+      child: Stack(
+        children: <Widget>[
+          Container(
+            constraints: BoxConstraints.tight(ne),
+            alignment: Alignment.center,
+            child: Container(
+              margin: EdgeInsets.all(ne.width / 2 - _iconSize),
+              constraints: BoxConstraints.tight(Size.square(_iconSize * 2)),
+              decoration: ShapeDecoration(
+                color: widget.backgroundColor,
+                shape: CircleBorder(),
+              ),
+              transform:
+              Matrix4.translationValues(0, -_yOffsetAnimation.value, 0),//TODO
+              child: Stack(children: <Widget>[
+                Container(
+                  //color: Colors.yellow,
+                    alignment: Alignment.center,
+                    child: SvgPicture.asset(
+                      widget.iconPath,
+                      //color: widget.unselectedForegroundColor,
+                      width: _iconSize,
+                      height: _iconSize * scaleAnimation.value,
+                      //  colorBlendMode: BlendMode.srcIn,
+                    )),
+                Container(
+                  // color: Colors.orange,
+                    alignment: Alignment.center,
+                    child: ClipRect(
+                        clipper: _SvgPictureClipper(
+                            _activeColorClipAnimation.value *
+                                scaleAnimation.value),
+                        child: SvgPicture.asset(
+                          widget.iconPath,
+                          // color: widget.selectedForegroundColor,
+                          width: _iconSize,
+                          height: _iconSize * scaleAnimation.value,
+                          //colorBlendMode: BlendMode.srcIn,
+                        ))),
+              ]),
+            ),
           ),
-          transform: Matrix4.translationValues(0, -_yOffsetAnimation.value, 0),
-          child: Stack(children: <Widget>[
-            Container(
-                alignment: Alignment.center,
-                child: SvgPicture.asset(
-                  widget.iconPath,
-                  color: widget.unselectedForegroundColor,
-                  width: _iconSize,
-                  height: _iconSize * scaleAnimation.value,
-                  colorBlendMode: BlendMode.srcIn,
-                )),
-            Container(
-                alignment: Alignment.center,
-                child: ClipRect(
-                  clipper: _SvgPictureClipper(
-                      _activeColorClipAnimation.value * scaleAnimation.value),
-                  child: SvgPicture.asset(
-                    widget.iconPath,
-                    color: widget.selectedForegroundColor,
-                    width: _iconSize,
-                    height: _iconSize * scaleAnimation.value,
-                    colorBlendMode: BlendMode.srcIn,
-                  ),
-                )),
-          ]),
-        ),
+          Positioned(
+              bottom: 3,
+              left: 16,
+              child: Align(
+                  alignment: Alignment.center,
+                  child: Visibility(
+                      visible: _selected,
+                      child: Text(
+                        list[widget.currentIndex],
+                        style: TextStyle(fontSize: 11,color: Color(0xFF9d9d9d)),//todo change text
+                      ))))
+        ],
       ),
     );
   }
