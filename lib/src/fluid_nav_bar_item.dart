@@ -204,7 +204,7 @@ class _FluidNavBarItemState extends State<FluidNavBarItem>
           ),
           Positioned(
               bottom: 0,
-              left: 16,
+              left: 14,
               child: Align(
                   alignment: Alignment.center,
                   child: Visibility(
