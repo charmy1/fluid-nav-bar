@@ -20,7 +20,7 @@ typedef void FluidNavBarButtonTappedCallback();
 List<String> list = [
   "Ana Sayfa",
   "Soru Çöz",
-  "Analiz",
+  "  Analiz  ",
   "Ödevler",
   "Pomodoro"
 ]; //todo as a parameter
