@@ -203,7 +203,7 @@ class _FluidNavBarItemState extends State<FluidNavBarItem>
             ),
           ),
           Positioned(
-              bottom: 3,
+              bottom: 0,
               left: 16,
               child: Align(
                   alignment: Alignment.center,
@@ -211,7 +211,7 @@ class _FluidNavBarItemState extends State<FluidNavBarItem>
                       visible: _selected,
                       child: Text(
                         list[widget.currentIndex],
-                        style: TextStyle(fontSize: 11,color: Color(0xFF9d9d9d)),//todo change text
+                        style: TextStyle(fontSize: 10,color: Color(0xFF9d9d9d)),//todo change text
                       ))))
         ],
       ),
