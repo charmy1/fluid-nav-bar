@@ -211,7 +211,7 @@ class _FluidNavBarItemState extends State<FluidNavBarItem>
                       visible: _selected,
                       child: Text(
                         list[widget.currentIndex],
-                        style: TextStyle(fontSize: 10,color: Color(0xFF9d9d9d)),//todo change text
+                        style: TextStyle(fontSize: 10,color: Color(0xFF9d9d9d),fontWeight: FontWeight.w500),//todo change text
                       ))))
         ],
       ),
