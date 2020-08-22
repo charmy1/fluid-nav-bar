@@ -14,5 +14,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+dependency_overrides:
+  flutter_svg: ^0.17.4
 
 flutter:
